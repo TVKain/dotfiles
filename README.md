@@ -118,8 +118,8 @@ When upgrading, the installer will:
 ### Tmux
 - Mouse support
 - Catppuccin theme
-- tmux-tilish plugin for i3-style keybindings (Alt+Space for new pane, Alt+Shift+Space for horizontal split, Alt+0-9 for window switching)
-- Alt+Enter remapped to Alt+Space to avoid WSL zoom conflict
+- tmux-tilish plugin for i3-style keybindings (Alt+` for new pane, Alt+Shift+` for horizontal split, Alt+0-9 for window switching)
+- Alt+Enter remapped to Alt+` to avoid WSL zoom and Windows settings pane conflicts
 - Window and pane numbering starting from 1 instead of 0
 - Automatic window renumbering
 - Plugin support via TPM
