@@ -67,15 +67,6 @@ disabled = true
 [cmd_duration]
 disabled = true
 
-[hostname]
-disabled = true
-
-[username]
-disabled = true
-
-[env_var]
-disabled = true
-
 [memory_usage]
 disabled = true
 
