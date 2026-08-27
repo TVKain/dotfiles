@@ -54,6 +54,9 @@ ls -la ~/.tmux/plugins/
 # Check if vim plugins are installed
 ls -la ~/.vim/plugged/
 
+# Install vim plugins manually if needed
+vim +PlugInstall +qall
+
 # Verify zsh configuration
 zsh -c 'echo $ZSH_VERSION'
 

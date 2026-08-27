@@ -133,12 +133,23 @@ highlight CocPumVirtualText ctermbg=236 ctermfg=8 guibg=#1e1e2e guifg=#6c7086
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+      \ <SID>check_coc() ? coc#refresh() : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" Use Ctrl+T to insert literal tab when needed
+inoremap <C-T> <TAB>
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+function! s:check_coc() abort
+  try
+    return exists('*coc#refresh') && coc#rpc#ready()
+  catch
+    return 0
+  endtry
 endfunction
 
 " Use <c-space> to trigger completion.
@@ -212,9 +223,42 @@ command! -nargs=0 Format :call CocAction('format')
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call CocAction('runCommand', 'editor.action.organizeImport')
 
+" ===========================
+"  CoC Extensions Configuration
+" ===========================
+" Install CoC extensions for C/C++ development
+autocmd BufReadPost *.c,*.h,*.cpp,*.hpp call CocAction('runCommand', 'coc-install', 'coc-clangd')
+
+" Enable document symbols for better code navigation
+autocmd BufReadPost * call CocAction('runCommand', 'coc-install', 'coc-json', 'coc-yaml', 'coc-markdownlint')
+
+" ===========================
+"  Enhanced CoC Features
+" ===========================
+" Enable document symbols for better code understanding
+nnoremap <silent> <leader>o  :<C-u>CocList outline<cr>
+
+" Enable workspace symbols for codebase analysis
+nnoremap <silent> <leader>ss  :<C-u>CocList -I symbols<cr>
+
+" Enable references for code graph analysis
+nnoremap <silent> <leader>gr  :<C-u>CocList references<cr>
+
+" Enable call hierarchy for function call analysis
+nnoremap <silent> <leader>ch  :<C-u>CocList calls<cr>
+
+" Enable code actions for quick fixes
+nnoremap <silent> <leader>ca  :<C-u>CocList actions<cr>
+
+" Enable diagnostics for error analysis
+nnoremap <silent> <leader>di  :<C-u>CocList diagnostics<cr>
+
+" Enable workspace diagnostics for codebase-wide issues
+nnoremap <silent> <leader>wd  :<C-u>CocList workspaceDiagnostics<cr>
+
 " Mappings for CoCList
-" Show all diagnostics.
-nnoremap <silent><nowait> <leader>a  :<C-u>CocList diagnostics<cr>
+" Show all diagnostics (mapped to <leader>di above)
+" nnoremap <silent><nowait> <leader>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
 nnoremap <silent><nowait> <leader>e  :<C-u>CocList extensions<cr>
 " Show commands.
@@ -239,7 +283,7 @@ set backspace=indent,eol,start
 set textwidth=80
 
 " Bracket pair highlighting for better visibility with catppuccin mocha
-highlight MatchParen cterm=bold ctermfg=15 ctermbg=61 gui=bold guifg=#cdd6f4 guibg=#89b4fa
+highlight MatchParen cterm=bold ctermfg=15 ctermbg=238 gui=bold guifg=#cdd6f4 guibg=#45475a
 
 " ===========================
 "  Search
@@ -369,9 +413,14 @@ function! s:ShowManual()
         \ '   │  Space rn     Rename symbol                 │',
         \ '   │  [g / ]g      Prev/Next diagnostic          │',
         \ '   │  Tab          Navigate completion menu      │',
-        \ '   │  Space a      Show all diagnostics          │',
+        \ '   │  Ctrl+T       Insert literal tab            │',
         \ '   │  Space o      Show outline                  │',
         \ '   │  Space ss     Search symbols                │',
+        \ '   │  Space gr     Search references             │',
+        \ '   │  Space ch     Show call hierarchy           │',
+        \ '   │  Space ca     Show code actions             │',
+        \ '   │  Space di     Show diagnostics              │',
+        \ '   │  Space wd     Workspace diagnostics         │',
         \ '   └─────────────────────────────────────────────┘',
         \ '',
         \ '   ┌─────────────────────────────────────────────┐',
