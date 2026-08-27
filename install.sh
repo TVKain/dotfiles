@@ -185,6 +185,23 @@ install_dependencies() {
     # Install basic tools
     sudo apt install -y git curl zsh vim tmux
     
+    # Install fzf and ripgrep (required for vim plugins)
+    if ! command -v fzf &> /dev/null; then
+        print_info "Installing fzf..."
+        sudo apt install -y fzf
+        print_success "fzf installed"
+    else
+        print_success "fzf already installed"
+    fi
+    
+    if ! command -v rg &> /dev/null; then
+        print_info "Installing ripgrep..."
+        sudo apt install -y ripgrep
+        print_success "ripgrep installed"
+    else
+        print_success "ripgrep already installed"
+    fi
+    
     # Install starship if not already installed
     if ! command -v starship &> /dev/null; then
         print_info "Installing starship..."

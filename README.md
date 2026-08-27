@@ -35,13 +35,16 @@ cd ~/dotfiles
 - Vim with configuration
 - Starship prompt
 - Tmux plugins (via TPM)
+- Vim plugins (via vim-plug)
+- fzf (fuzzy finder)
+- ripgrep (fast search tool)
 
 ## Manual Setup
 
 After installation, you may need to:
 
-1. **Tmux plugins**: Press `Ctrl+B` then `Shift+I` to install tmux plugins
-2. **Vim plugins**: Open vim and run `:PlugInstall`
+1. **Tmux plugins**: Press `Ctrl+B` then `Shift+I` to install tmux plugins (if not auto-installed)
+2. **Vim plugins**: The installer automatically runs `:PlugInstall`, but you can manually run it in vim if needed
 
 ## Configuration Files
 
