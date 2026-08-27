@@ -162,8 +162,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>cf  <Plug>(coc-format-selected)
+nmap <leader>cf  <Plug>(coc-format-selected)
 
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
@@ -200,7 +200,7 @@ nnoremap <silent><nowait> <leader>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
 nnoremap <silent><nowait> <leader>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
-nnoremap <silent><nowait> <leader>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <leader>ss  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
 nnoremap <silent><nowait> <leader>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
@@ -239,8 +239,8 @@ nnoremap <silent> <leader><leader> :WhichKey '<Space>'<CR>
 " ===========================
 "  Buffer Navigation
 " ===========================
-nnoremap <Tab> :bn<CR>
-nnoremap <S-Tab> :bp<CR>
+nnoremap <leader>bn :bn<CR>
+nnoremap <leader>bp :bp<CR>
 nnoremap <leader>q :bd<CR>
 nnoremap <leader>Q :bd!<CR>
 nnoremap <leader>w :w<CR>
@@ -289,8 +289,8 @@ function! s:ShowManual()
         \ '   ┌─────────────────────────────────────────────┐',
         \ '   │  BUFFERS                                    │',
         \ '   ├─────────────────────────────────────────────┤',
-        \ '   │  Tab          Next buffer                   │',
-        \ '   │  Shift-Tab    Previous buffer               │',
+        \ '   │  Space bn     Next buffer                   │',
+        \ '   │  Space bp     Previous buffer               │',
         \ '   │  Space q      Close buffer                  │',
         \ '   │  Space Q      Close buffer (no save)        │',
         \ '   │  Space w      Save buffer                   │',
@@ -333,18 +333,18 @@ function! s:ShowManual()
         \ '   │  C INTELLISENSE & FORMATTING                │',
         \ '   ├─────────────────────────────────────────────┤',
         \ '   │  Space F      Format C file (BSD style)     │',
-        \ '   │  Space f      Format selected (CoC)         │',
-        \ '   │  gd           Go to definition               │',
-        \ '   │  gr           Go to references               │',
-        \ '   │  gi           Go to implementation            │',
-        \ '   │  gy           Go to type definition          │',
+        \ '   │  Space cf     Format selected (CoC)         │',
+        \ '   │  gd           Go to definition              │',
+        \ '   │  gr           Go to references              │',
+        \ '   │  gi           Go to implementation          │',
+        \ '   │  gy           Go to type definition         │',
         \ '   │  K            Show documentation            │',
-        \ '   │  Space rn     Rename symbol                  │',
-        \ '   │  [g / ]g      Prev/Next diagnostic           │',
-        \ '   │  Tab          Navigate completion menu       │',
-        \ '   │  Space a      Show all diagnostics           │',
-        \ '   │  Space o      Show outline                   │',
-        \ '   │  Space s      Search symbols                 │',
+        \ '   │  Space rn     Rename symbol                 │',
+        \ '   │  [g / ]g      Prev/Next diagnostic          │',
+        \ '   │  Tab          Navigate completion menu      │',
+        \ '   │  Space a      Show all diagnostics          │',
+        \ '   │  Space o      Show outline                  │',
+        \ '   │  Space ss     Search symbols                │',
         \ '   └─────────────────────────────────────────────┘',
         \ '',
         \ '   ┌─────────────────────────────────────────────┐',
