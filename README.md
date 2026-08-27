@@ -122,7 +122,7 @@ When upgrading, the installer will:
 - Alt+Enter remapped to Alt+x to avoid WSL zoom and Windows settings pane conflicts
 - Window and pane numbering starting from 1 instead of 0
 - Automatic window renumbering
-- Scroll mode (copy mode): Alt+q to enter, PageUp/PageDown to scroll, q to exit
+- Scroll mode (copy mode): Alt+q to enter, q to exit, vi-style keybindings (j/k to scroll)
 - Plugin support via TPM
 
 ### Vim
