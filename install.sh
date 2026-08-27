@@ -14,6 +14,10 @@ NC='\033[0m' # No Color
 # Global variable for backup directory
 BACKUP_DIR=""
 
+# Installation tracking
+INSTALL_MARKER="$HOME/.dotfiles_installed"
+INSTALL_VERSION="1.0"
+
 # Function to print colored output
 print_success() {
     echo -e "${GREEN}✓ $1${NC}"
@@ -62,6 +66,28 @@ check_os_support() {
     print_success "Detected Ubuntu $VERSION"
 }
 
+# Function to check if this is an upgrade
+check_installation_type() {
+    if [ -f "$INSTALL_MARKER" ]; then
+        INSTALLED_VERSION=$(cat "$INSTALL_MARKER" | grep "version" | cut -d'=' -f2)
+        INSTALLED_DATE=$(cat "$INSTALL_MARKER" | grep "date" | cut -d'=' -f2)
+        print_info "Previous installation detected (version $INSTALLED_VERSION on $INSTALLED_DATE)"
+        return 0  # This is an upgrade
+    else
+        return 1  # This is a fresh install
+    fi
+}
+
+# Function to write installation marker
+write_installation_marker() {
+    cat > "$INSTALL_MARKER" <<EOF
+version=$INSTALL_VERSION
+date=$(date +%Y-%m-%d_%H:%M:%S)
+dotfiles_dir=$(pwd)
+EOF
+    print_success "Installation marker created"
+}
+
 # Function to check for existing configs
 check_existing_configs() {
     EXISTING_CONFIGS=()
@@ -87,7 +113,23 @@ check_existing_configs() {
 
 # Function to prompt user for confirmation
 prompt_user() {
-    if check_existing_configs; then
+    if check_installation_type; then
+        # This is an upgrade
+        echo "This is an UPGRADE installation."
+        echo "The installer will:"
+        echo "  1. Backup existing configurations"
+        echo "  2. Remove existing configurations"
+        echo "  3. Install updated dotfiles"
+        echo ""
+        read -p "Do you want to continue with the upgrade? (y/N): " -n 1 -r
+        echo ""
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            print_info "Upgrade cancelled by user"
+            exit 0
+        fi
+    elif check_existing_configs; then
+        # This is a fresh install with existing configs
+        echo "This is a FRESH installation with existing configurations."
         echo "The installer will:"
         echo "  1. Backup existing configurations"
         echo "  2. Remove existing configurations"
@@ -100,7 +142,8 @@ prompt_user() {
             exit 0
         fi
     else
-        print_info "No existing configurations found. Proceeding with installation."
+        # This is a fresh install with no existing configs
+        print_info "Fresh installation with no existing configurations. Proceeding..."
     fi
 }
 
@@ -232,6 +275,7 @@ main() {
     install_dotfiles
     set_default_shell
     install_tmux_plugins
+    write_installation_marker
     
     echo ""
     echo "=========================================="
@@ -239,6 +283,7 @@ main() {
     echo "=========================================="
     echo ""
     print_info "Backups saved to: $BACKUP_DIR"
+    print_info "Installation version: $INSTALL_VERSION"
     print_info "Please log out and log back in for all changes to take effect."
     print_info "Or run: source ~/.zshrc"
     echo ""
