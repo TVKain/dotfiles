@@ -24,7 +24,8 @@ if [ -f ~/.local/share/fzf-tab/fzf-tab.plugin.zsh ]; then
     zstyle ':completion:*' menu no
     zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
     
-    # Prioritize commands and aliases
+    # Prioritize commands and aliases in command position
+    zstyle ':completion:*:*:-command-:*' group-order commands builtins functions aliases
     zstyle ':completion:*' accept-exact '*(N)'
     zstyle ':completion:*' use-cache on
     zstyle ':completion:*' cache-path ~/.zcompcache
@@ -33,7 +34,8 @@ if [ -f ~/.local/share/fzf-tab/fzf-tab.plugin.zsh ]; then
     zstyle ':completion:*' group-name ''
     zstyle ':completion:*:descriptions' format '[%d]'
     
-    # Prioritize commands and functions
+    # Different matching for commands vs files
+    zstyle ':completion:*:*:-command-:*' matcher 'm:{a-z}={A-Z}'
     zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
     
     # Add fzf+zoxide for interactive directory selection
