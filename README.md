@@ -123,7 +123,7 @@ When upgrading, the installer will:
 - Window and pane numbering starting from 1 instead of 0
 - Automatic window renumbering
 - Scroll mode (copy mode): Alt+q to enter, q to exit, vi-style keybindings (j/k to scroll)
-- Custom help popup: Ctrl+b then h to show common keybindings (stays open until q or Esc)
+- Custom help popup: Alt+/ to show common keybindings (stays open until q or Esc)
 - Plugin support via TPM
 
 ### Vim
