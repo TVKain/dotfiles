@@ -30,6 +30,7 @@ Thumbs.db
 
 # External plugins (installed separately)
 .local/share/fzf-tab
+.local/share/zsh-autosuggestions
 
 # Zsh completion cache
 .zcompcache

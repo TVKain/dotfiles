@@ -221,6 +221,15 @@ install_dependencies() {
         print_success "fzf-tab already installed"
     fi
     
+    # Install zsh-autosuggestions
+    if [ ! -d "$HOME/.local/share/zsh-autosuggestions" ]; then
+        print_info "Installing zsh-autosuggestions..."
+        git clone https://github.com/zsh-users/zsh-autosuggestions ~/.local/share/zsh-autosuggestions
+        print_success "zsh-autosuggestions installed"
+    else
+        print_success "zsh-autosuggestions already installed"
+    fi
+    
     # Install starship if not already installed
     if ! command -v starship &> /dev/null; then
         print_info "Installing starship..."
@@ -276,11 +285,6 @@ install_dotfiles() {
     mkdir -p "$HOME/.config"
     cp "$DOTFILES_DIR/config/starship.toml" "$HOME/.config/starship.toml"
     print_success "Installed starship.toml"
-    
-    # Initialize zsh completion
-    print_info "Initializing zsh completion..."
-    zsh -c "autoload -U compinit && compinit"
-    print_success "Zsh completion initialized"
 }
 
 # Function to set zsh as default shell

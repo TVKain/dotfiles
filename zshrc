@@ -16,25 +16,18 @@ alias cd='z'
 # Initialize completion system
 autoload -U compinit; compinit
 
+# Enable zsh-autosuggestions
+if [ -f ~/.local/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    source ~/.local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
 # Enable fzf-tab for better completion
 if [ -f ~/.local/share/fzf-tab/fzf-tab.plugin.zsh ]; then
     source ~/.local/share/fzf-tab/fzf-tab.plugin.zsh
     
-    # Configure fzf-tab
+    # Configure fzf-tab (minimal configuration)
     zstyle ':completion:*' menu no
-    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS
-    
-    # Accept exact matches
-    zstyle ':completion:*' accept-exact '*(N)'
-    zstyle ':completion:*' use-cache on
-    zstyle ':completion:*' cache-path ~/.zcompcache
-    
-    # Group and sort completions
-    zstyle ':completion:*' group-name ''
-    zstyle ':completion:*:descriptions' format '[%d]'
-    
-    # Case-insensitive matching
-    zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
     
     # Add fzf+zoxide for interactive directory selection
     # Use 'zi' command for interactive directory selection
