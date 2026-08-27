@@ -111,7 +111,7 @@ When upgrading, the installer will:
 - High-precision time command
 - zoxide integration (cd is aliased to zoxide for smart directory navigation)
 - fzf-tab for enhanced tab completion (fzf-powered with vim navigation)
-- zsh-autosuggestions for command suggestions as you type
+- zsh-autosuggestions for command suggestions as you type (Ctrl+Space to accept)
 - Interactive directory selection with 'zi' command (fzf+zoxide with border)
 - Local configuration support via ~/.zshrc.local
 

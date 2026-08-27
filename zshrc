@@ -19,6 +19,9 @@ autoload -U compinit; compinit
 # Enable zsh-autosuggestions
 if [ -f ~/.local/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
     source ~/.local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    
+    # Bind Ctrl+Space to accept suggestion
+    bindkey '^ ' autosuggest-accept
 fi
 
 # Enable fzf-tab for better completion
