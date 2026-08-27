@@ -51,7 +51,7 @@ setopt NO_CHECK_JOBS
 # Custom aliases
 alias ll='ls -la'
 alias la='ls -A'
-alias l='ls -CF'
+alias l='ls -1'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias grep='grep --color=auto'
