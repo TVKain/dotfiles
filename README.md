@@ -34,6 +34,7 @@ cd ~/dotfiles
 - Tmux with TPM plugin manager
 - Vim with configuration
 - Starship prompt
+- Leaf (terminal markdown previewer)
 - Tmux plugins (via TPM): tmux-sensible, tmux-tilish, catppuccin theme
 - Vim plugins (via vim-plug)
 - fzf (fuzzy finder)
@@ -130,9 +131,35 @@ When upgrading, the installer will:
 - Plugin management via vim-plug
 - Custom configuration
 - Syntax highlighting and more
+- Leaf markdown preview integration (use `\md` to preview markdown files)
 
 ### Starship
 - Minimal prompt with Catppuccin Mocha color scheme
 - Git branch display
 - Username and hostname display
 - Performance optimized
+
+### Leaf (Terminal Markdown Previewer)
+- GUI-like markdown preview in terminal
+- Live preview with watch mode
+- Fuzzy file picker for markdown files
+- Syntax highlighting for code blocks
+- Support for tables, lists, blockquotes, and more
+- LaTeX and Mermaid diagram support
+- Custom themes available
+- Vim integration available
+
+**Usage:**
+```bash
+# Preview a markdown file
+leaf README.md
+
+# Watch mode (auto-reload on save)
+leaf -w README.md
+
+# Open fuzzy file picker
+leaf
+
+# Render to stdout (for pipes)
+leaf --inline README.md
+```

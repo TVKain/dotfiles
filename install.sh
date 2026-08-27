@@ -239,6 +239,15 @@ install_dependencies() {
         print_success "Starship already installed"
     fi
     
+    # Install leaf (terminal markdown previewer) if not already installed
+    if ! command -v leaf &> /dev/null; then
+        print_info "Installing leaf (terminal markdown previewer)..."
+        curl -fsSL https://raw.githubusercontent.com/RivoLink/leaf/main/scripts/install.sh | sh
+        print_success "Leaf installed"
+    else
+        print_success "Leaf already installed"
+    fi
+    
     # Install TPM (tmux plugin manager) if not already installed
     if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
         print_info "Installing TPM (tmux plugin manager)..."

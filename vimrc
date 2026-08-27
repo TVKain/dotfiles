@@ -271,6 +271,9 @@ nnoremap <leader>r :History<CR>
 " ===========================
 nnoremap <leader>m :Manual<CR>
 
+" Leaf markdown preview
+nnoremap <leader>md :vertical botright terminal leaf -w %<CR>
+
 command! Manual call s:ShowManual()
 
 let s:manual_line = 1
