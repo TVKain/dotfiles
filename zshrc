@@ -13,11 +13,23 @@ eval "$(zoxide init zsh)"
 # Override cd with zoxide z command for smart navigation
 alias cd='z'
 
+# Enhanced fzf completion and key bindings
+if command -v fzf &> /dev/null; then
+    # Use fzf for completion
+    source <(fzf --zsh)
+fi
+
 # Minimal zsh configuration for better performance
 # Disable slow features
 setopt NO_BEEP
 setopt NO_HUP
 setopt NO_CHECK_JOBS
+
+# Enhanced completion options
+setopt AUTO_MENU
+setopt COMPLETE_IN_WORD
+setopt LIST_PACKED
+setopt MENU_COMPLETE
 
 # User configuration
 
