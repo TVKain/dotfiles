@@ -131,6 +131,7 @@ When upgrading, the installer will:
 - Syntax highlighting and more
 
 ### Starship
-- Minimal prompt
+- Minimal prompt with Catppuccin Mocha color scheme
 - Git branch display
+- Username and hostname display
 - Performance optimized
