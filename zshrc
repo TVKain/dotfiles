@@ -7,6 +7,9 @@ export PATH="$HOME/.local/bin:$PATH"
 # Initialize starship prompt
 eval "$(starship init zsh)"
 
+# Initialize zoxide (smart cd command)
+eval "$(zoxide init zsh)"
+
 # Minimal zsh configuration for better performance
 # Disable slow features
 setopt NO_BEEP

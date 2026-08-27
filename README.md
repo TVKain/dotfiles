@@ -38,6 +38,7 @@ cd ~/dotfiles
 - Vim plugins (via vim-plug)
 - fzf (fuzzy finder)
 - ripgrep (fast search tool)
+- zoxide (smart cd command)
 
 ## Manual Setup
 
@@ -84,6 +85,7 @@ When upgrading, the installer will:
 - Custom aliases
 - History configuration
 - High-precision time command
+- zoxide integration (use `z` instead of `cd` for smart directory navigation)
 
 ### Tmux
 - Mouse support

@@ -202,6 +202,15 @@ install_dependencies() {
         print_success "ripgrep already installed"
     fi
     
+    # Install zoxide (smart cd command)
+    if ! command -v zoxide &> /dev/null; then
+        print_info "Installing zoxide..."
+        curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+        print_success "zoxide installed"
+    else
+        print_success "zoxide already installed"
+    fi
+    
     # Install starship if not already installed
     if ! command -v starship &> /dev/null; then
         print_info "Installing starship..."
