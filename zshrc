@@ -21,6 +21,18 @@ if [ -f ~/.local/share/fzf-tab/fzf-tab.plugin.zsh ]; then
     zstyle ':completion:*' menu no
     zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
     
+    # Prioritize commands and aliases
+    zstyle ':completion:*' accept-exact '*(N)'
+    zstyle ':completion:*' use-cache on
+    zstyle ':completion:*' cache-path ~/.zcompcache
+    
+    # Group and sort completions
+    zstyle ':completion:*' group-name ''
+    zstyle ':completion:*:descriptions' format '[%d]'
+    
+    # Prioritize commands and functions
+    zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+    
     # Add fzf+zoxide for interactive directory selection
     # Use 'zi' command for interactive directory selection
     zi() {
