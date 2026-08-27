@@ -2,6 +2,10 @@
 
 Personal configuration files for Ubuntu 24.04+
 
+## Repository
+
+https://github.com/TVKain/dotfiles
+
 ## Contents
 
 - **zsh**: Zsh configuration with starship prompt
@@ -11,10 +15,11 @@ Personal configuration files for Ubuntu 24.04+
 
 ## Installation
 
-Run the installer script:
+Clone the repository and run the installer:
 
 ```bash
-cd dotfiles
+git clone https://github.com/TVKain/dotfiles.git ~/dotfiles
+cd ~/dotfiles
 ./install.sh
 ```
 
@@ -50,6 +55,24 @@ After installation, you may need to:
 
 The installer automatically backs up existing configurations to:
 `~/dotfiles_backup_YYYYMMDD_HHMMSS/`
+
+## Installation Tracking
+
+The installer tracks installations using a marker file (`~/.dotfiles_installed`) that includes:
+- Installation version
+- Installation date
+- Dotfiles directory path
+
+This allows the installer to detect:
+- **Fresh installations** (no previous installation)
+- **Upgrades** (previous installation detected)
+
+When upgrading, the installer will:
+1. Detect the previous installation version and date
+2. Prompt for confirmation
+3. Backup existing configurations
+4. Remove old configurations
+5. Install updated dotfiles
 
 ## Features
 
