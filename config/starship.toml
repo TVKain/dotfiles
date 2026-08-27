@@ -6,6 +6,9 @@ add_newline = false
 # Set Catppuccin Mocha palette
 palette = "catppuccin_mocha"
 
+# Remove right padding
+right_format = ""
+
 # Username and hostname with Catppuccin colors
 [username]
 show_always = true
