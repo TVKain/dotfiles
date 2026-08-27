@@ -263,12 +263,6 @@ install_dotfiles() {
     cp "$DOTFILES_DIR/vimrc" "$HOME/.vimrc"
     print_success "Installed .vimrc"
     
-    # Copy vim directory
-    if [ -d "$DOTFILES_DIR/vim" ]; then
-        cp -r "$DOTFILES_DIR/vim" "$HOME/.vim"
-        print_success "Installed .vim directory"
-    fi
-    
     # Copy starship config
     mkdir -p "$HOME/.config"
     cp "$DOTFILES_DIR/config/starship.toml" "$HOME/.config/starship.toml"

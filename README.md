@@ -52,8 +52,9 @@ After installation, you may need to:
 - `zshrc` → `~/.zshrc`
 - `tmux.conf` → `~/.tmux.conf`
 - `vimrc` → `~/.vimrc`
-- `vim/` → `~/.vim/`
 - `config/starship.toml` → `~/.config/starship.toml`
+
+Note: The `~/.vim/` directory is created automatically by vim-plug during plugin installation.
 
 ## Local Configuration
 
