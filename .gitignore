@@ -1,5 +1,6 @@
 # Vim
 vim/plugged/
+vim/autoload/
 vim/.netrwhist
 vim/tags
 

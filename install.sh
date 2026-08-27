@@ -202,6 +202,16 @@ install_dependencies() {
     else
         print_success "TPM already installed"
     fi
+    
+    # Install vim-plug if not already installed
+    if [ ! -f "$HOME/.vim/autoload/plug.vim" ]; then
+        print_info "Installing vim-plug..."
+        curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        print_success "vim-plug installed"
+    else
+        print_success "vim-plug already installed"
+    fi
 }
 
 # Function to install dotfiles
@@ -260,6 +270,17 @@ install_tmux_plugins() {
     fi
 }
 
+# Function to install vim plugins
+install_vim_plugins() {
+    print_info "Installing vim plugins..."
+    if [ -f "$HOME/.vim/autoload/plug.vim" ]; then
+        vim +PlugInstall +qall
+        print_success "Vim plugins installed"
+    else
+        print_warning "vim-plug not found, skipping vim plugin installation"
+    fi
+}
+
 # Main installation process
 main() {
     echo "=========================================="
@@ -275,6 +296,7 @@ main() {
     install_dotfiles
     set_default_shell
     install_tmux_plugins
+    install_vim_plugins
     write_installation_marker
     
     echo ""

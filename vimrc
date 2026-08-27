@@ -1,6 +1,9 @@
 " ===========================
 "  Plugins (vim-plug)
 " ===========================
+" Note: vim-plug needs to be installed first:
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
