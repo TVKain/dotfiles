@@ -184,7 +184,7 @@ install_dependencies() {
     sudo apt update
     
     # Install basic tools
-    sudo apt install -y git curl zsh vim tmux
+    sudo apt install -y git curl zsh vim tmux tree
     
     # Install fzf and ripgrep (required for vim plugins)
     if ! command -v fzf &> /dev/null; then

@@ -39,6 +39,7 @@ cd ~/dotfiles
 - fzf (fuzzy finder)
 - ripgrep (fast search tool)
 - zoxide (smart cd command)
+- tree (directory preview for fzf)
 
 ## Manual Setup
 
@@ -108,6 +109,8 @@ When upgrading, the installer will:
 - History configuration
 - High-precision time command
 - zoxide integration (cd is aliased to zoxide for smart directory navigation)
+- fzf-based completion (interactive fuzzy completion)
+- Interactive directory selection with 'zi' command (fzf+zoxide with preview)
 - Local configuration support via ~/.zshrc.local
 
 ### Tmux

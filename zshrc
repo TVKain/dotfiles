@@ -16,7 +16,15 @@ alias cd='z'
 # Enhanced fzf completion and key bindings
 if command -v fzf &> /dev/null; then
     # Use fzf for completion
-    source <(fzf --zsh)
+    eval "$(fzf --zsh)"
+    
+    # Add fzf+zoxide for interactive directory selection
+    # Use 'zi' command for interactive directory selection
+    zi() {
+        local dir
+        dir=$(zoxide query -l "$@" | fzf +m --height 50% --border --preview 'tree -L 2 {}' --preview-window '~:3')
+        cd "$dir"
+    }
 fi
 
 # Minimal zsh configuration for better performance
