@@ -11,6 +11,9 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
+# Global variable for backup directory
+BACKUP_DIR=""
+
 # Function to print colored output
 print_success() {
     echo -e "${GREEN}✓ $1${NC}"
@@ -59,6 +62,48 @@ check_os_support() {
     print_success "Detected Ubuntu $VERSION"
 }
 
+# Function to check for existing configs
+check_existing_configs() {
+    EXISTING_CONFIGS=()
+    
+    [ -f "$HOME/.zshrc" ] && EXISTING_CONFIGS+=(".zshrc")
+    [ -f "$HOME/.tmux.conf" ] && EXISTING_CONFIGS+=(".tmux.conf")
+    [ -f "$HOME/.vimrc" ] && EXISTING_CONFIGS+=(".vimrc")
+    [ -d "$HOME/.vim" ] && EXISTING_CONFIGS+=(".vim")
+    [ -f "$HOME/.config/starship.toml" ] && EXISTING_CONFIGS+=("starship.toml")
+    
+    if [ ${#EXISTING_CONFIGS[@]} -gt 0 ]; then
+        echo ""
+        print_warning "Found existing configuration files:"
+        for config in "${EXISTING_CONFIGS[@]}"; do
+            echo "  - $config"
+        done
+        echo ""
+        return 0
+    else
+        return 1
+    fi
+}
+
+# Function to prompt user for confirmation
+prompt_user() {
+    if check_existing_configs; then
+        echo "The installer will:"
+        echo "  1. Backup existing configurations"
+        echo "  2. Remove existing configurations"
+        echo "  3. Install new dotfiles"
+        echo ""
+        read -p "Do you want to continue? (y/N): " -n 1 -r
+        echo ""
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            print_info "Installation cancelled by user"
+            exit 0
+        fi
+    else
+        print_info "No existing configurations found. Proceeding with installation."
+    fi
+}
+
 # Function to backup existing configs
 backup_configs() {
     print_info "Backing up existing configurations..."
@@ -73,6 +118,19 @@ backup_configs() {
     [ -f "$HOME/.config/starship.toml" ] && cp "$HOME/.config/starship.toml" "$BACKUP_DIR/" && print_info "Backed up starship.toml"
     
     print_success "Backups created in $BACKUP_DIR"
+}
+
+# Function to remove existing configs
+remove_existing_configs() {
+    print_info "Removing existing configurations..."
+    
+    [ -f "$HOME/.zshrc" ] && rm "$HOME/.zshrc" && print_info "Removed .zshrc"
+    [ -f "$HOME/.tmux.conf" ] && rm "$HOME/.tmux.conf" && print_info "Removed .tmux.conf"
+    [ -f "$HOME/.vimrc" ] && rm "$HOME/.vimrc" && print_info "Removed .vimrc"
+    [ -d "$HOME/.vim" ] && rm -rf "$HOME/.vim" && print_info "Removed .vim"
+    [ -f "$HOME/.config/starship.toml" ] && rm "$HOME/.config/starship.toml" && print_info "Removed starship.toml"
+    
+    print_success "Existing configurations removed"
 }
 
 # Function to install dependencies
@@ -167,7 +225,9 @@ main() {
     echo ""
     
     check_os_support
+    prompt_user
     backup_configs
+    remove_existing_configs
     install_dependencies
     install_dotfiles
     set_default_shell
@@ -178,6 +238,7 @@ main() {
     print_success "Installation completed!"
     echo "=========================================="
     echo ""
+    print_info "Backups saved to: $BACKUP_DIR"
     print_info "Please log out and log back in for all changes to take effect."
     print_info "Or run: source ~/.zshrc"
     echo ""
