@@ -18,11 +18,14 @@ if command -v fzf &> /dev/null; then
     # Use fzf for completion
     eval "$(fzf --zsh)"
     
+    # FZF key bindings for better navigation
+    export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --inline-info'
+    
     # Add fzf+zoxide for interactive directory selection
     # Use 'zi' command for interactive directory selection
     zi() {
         local dir
-        dir=$(zoxide query -l "$@" | fzf +m --height 50% --border --preview 'tree -L 2 {}' --preview-window '~:3')
+        dir=$(zoxide query -l "$@" | fzf +m --height 50% --border)
         cd "$dir"
     }
 fi
