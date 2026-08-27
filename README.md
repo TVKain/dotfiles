@@ -119,6 +119,7 @@ When upgrading, the installer will:
 - Mouse support
 - Catppuccin theme
 - tmux-tilish plugin for i3-style keybindings (Prefix+Enter for new window, Prefix+Shift+Enter for horizontal split, Prefix+0-9 for window switching)
+- Window and pane numbering starting from 1 instead of 0
 - Automatic window renumbering
 - Plugin support via TPM
 
