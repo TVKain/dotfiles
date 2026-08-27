@@ -1,0 +1,125 @@
+# Starship configuration - minimal for better performance
+
+[directory]
+read_only = " "
+read_only_style = ""
+
+# Git configuration - show branch name but disable status symbols
+[git_branch]
+disabled = false
+symbol = ""
+
+[git_commit]
+disabled = true
+
+[git_state]
+disabled = true
+
+[git_status]
+disabled = true
+
+[git_metrics]
+disabled = true
+
+# Disable other modules for minimal performance
+[aws]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[azure]
+disabled = true
+
+[python]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[rust]
+disabled = true
+
+[golang]
+disabled = true
+
+[docker_context]
+disabled = true
+
+[package]
+disabled = true
+
+[cmd_duration]
+disabled = true
+
+[hostname]
+disabled = true
+
+[username]
+disabled = true
+
+[env_var]
+disabled = true
+
+[memory_usage]
+disabled = true
+
+[time]
+disabled = true
+
+[shlvl]
+disabled = true
+
+[singularity]
+disabled = true
+
+[kubernetes]
+disabled = true
+
+[vagrant]
+disabled = true
+
+[spack]
+disabled = true
+
+[conda]
+disabled = true
+
+[meson]
+disabled = true
+
+[gradle]
+disabled = true
+
+[helm]
+disabled = true
+
+[dart]
+disabled = true
+
+[deno]
+disabled = true
+
+[perl]
+disabled = true
+
+[php]
+disabled = true
+
+[julia]
+disabled = true
+
+[ruby]
+disabled = true
+
+[swift]
+disabled = true
+
+[terraform]
+disabled = true
+
+[nix_shell]
+disabled = true
+
+[guix_shell]
+disabled = true

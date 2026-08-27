@@ -1,0 +1,21 @@
+# Vim
+vim/plugged/
+vim/.netrwhist
+vim/tags
+
+# Backup files
+*.backup
+*.bak
+*~
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
