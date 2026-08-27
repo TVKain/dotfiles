@@ -22,10 +22,9 @@ if [ -f ~/.local/share/fzf-tab/fzf-tab.plugin.zsh ]; then
     
     # Configure fzf-tab
     zstyle ':completion:*' menu no
-    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS
     
-    # Prioritize commands and aliases in command position
-    zstyle ':completion:*:*:-command-:*' tag-order 'commands functions builtins aliases'
+    # Accept exact matches
     zstyle ':completion:*' accept-exact '*(N)'
     zstyle ':completion:*' use-cache on
     zstyle ':completion:*' cache-path ~/.zcompcache
