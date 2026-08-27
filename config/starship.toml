@@ -1,5 +1,8 @@
 # Starship configuration - minimal for better performance
 
+# Remove blank line before prompt
+add_newline = false
+
 [directory]
 read_only = " "
 read_only_style = ""
