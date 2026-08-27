@@ -13,6 +13,9 @@ eval "$(zoxide init zsh)"
 # Override cd with zoxide z command for smart navigation
 alias cd='z'
 
+# Initialize completion system
+autoload -U compinit; compinit
+
 # Enable fzf-tab for better completion
 if [ -f ~/.local/share/fzf-tab/fzf-tab.plugin.zsh ]; then
     source ~/.local/share/fzf-tab/fzf-tab.plugin.zsh

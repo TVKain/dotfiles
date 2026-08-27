@@ -276,6 +276,11 @@ install_dotfiles() {
     mkdir -p "$HOME/.config"
     cp "$DOTFILES_DIR/config/starship.toml" "$HOME/.config/starship.toml"
     print_success "Installed starship.toml"
+    
+    # Initialize zsh completion
+    print_info "Initializing zsh completion..."
+    zsh -c "autoload -U compinit && compinit"
+    print_success "Zsh completion initialized"
 }
 
 # Function to set zsh as default shell
