@@ -184,7 +184,17 @@ install_dependencies() {
     sudo apt update
     
     # Install basic tools
-    sudo apt install -y git curl zsh vim tmux
+    sudo apt install -y git curl zsh vim tmux bat
+    
+    # Handle bat vs batcat naming on Ubuntu/Debian
+    if command -v batcat &> /dev/null && ! command -v bat &> /dev/null; then
+        print_info "Creating bat symlink for batcat..."
+        mkdir -p ~/.local/bin
+        ln -sf /usr/bin/batcat ~/.local/bin/bat
+        print_success "Created bat symlink"
+    elif command -v bat &> /dev/null; then
+        print_success "bat already available"
+    fi
     
     # Install fzf and ripgrep (required for vim plugins)
     if ! command -v fzf &> /dev/null; then

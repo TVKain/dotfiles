@@ -35,6 +35,7 @@ cd ~/dotfiles
 - Vim with configuration
 - Starship prompt
 - Leaf (terminal markdown previewer)
+- Bat (cat clone with syntax highlighting)
 - Tmux plugins (via TPM): tmux-sensible, tmux-tilish, catppuccin theme
 - Vim plugins (via vim-plug)
 - fzf (fuzzy finder)
@@ -107,7 +108,7 @@ When upgrading, the installer will:
 
 ### Zsh
 - Starship prompt (minimal and fast)
-- Custom aliases
+- Custom aliases (including `cat` aliased to `bat` for syntax highlighting)
 - History configuration
 - High-precision time command
 - zoxide integration (cd is aliased to zoxide for smart directory navigation)
@@ -162,4 +163,31 @@ leaf
 
 # Render to stdout (for pipes)
 leaf --inline README.md
+```
+
+### Bat (Cat Clone with Syntax Highlighting)
+- Syntax highlighting for many programming and markup languages
+- Git integration to show file modifications
+- Automatic paging for large files
+- Show non-printable characters
+- File concatenation support
+- Integration with fzf, ripgrep, and other tools
+- `cat` is aliased to `bat --paging=never` for seamless replacement
+
+**Usage:**
+```bash
+# View a file with syntax highlighting
+bat README.md
+
+# View multiple files
+bat src/*.rs
+
+# Show line numbers
+bat -n main.rs
+
+# Show non-printable characters
+bat -A /etc/hosts
+
+# Use as cat replacement (already aliased)
+cat file.txt
 ```
