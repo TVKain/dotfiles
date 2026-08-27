@@ -118,6 +118,7 @@ When upgrading, the installer will:
 ### Tmux
 - Mouse support
 - Catppuccin theme
+- i3-style keybindings (Prefix+Enter for new window, Prefix+Shift+Enter for horizontal split, Prefix+0-9 for window switching)
 - Automatic window renumbering
 - Plugin support via TPM
 
