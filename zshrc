@@ -10,6 +10,9 @@ eval "$(starship init zsh)"
 # Initialize zoxide (smart cd command)
 eval "$(zoxide init zsh)"
 
+# Override cd with zoxide z command for smart navigation
+alias cd='z'
+
 # Minimal zsh configuration for better performance
 # Disable slow features
 setopt NO_BEEP
@@ -64,3 +67,9 @@ setopt SHARE_HISTORY
 
 # Time format configuration
 TIMEFMT="%J  %*U user %*S system %P cpu %*E total"
+
+# Local configuration (machine-specific, not committed)
+# Create ~/.zshrc.local for your local settings, aliases, and credentials
+if [ -f ~/.zshrc.local ]; then
+    source ~/.zshrc.local
+fi

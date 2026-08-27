@@ -55,6 +55,25 @@ After installation, you may need to:
 - `vim/` → `~/.vim/`
 - `config/starship.toml` → `~/.config/starship.toml`
 
+## Local Configuration
+
+For machine-specific settings, credentials, and local overrides:
+
+1. Copy the example file:
+   ```bash
+   cp ~/dotfiles/zshrc.local.example ~/.zshrc.local
+   ```
+
+2. Edit `~/.zshrc.local` with your local settings:
+   - API keys and credentials
+   - Local aliases
+   - Machine-specific environment variables
+   - Local functions
+
+3. The file is automatically sourced by `.zshrc` and is gitignored
+
+**Note:** Never commit sensitive information to the repository. Use `~/.zshrc.local` for credentials and machine-specific configuration.
+
 ## Backup
 
 The installer automatically backs up existing configurations to:
@@ -85,7 +104,8 @@ When upgrading, the installer will:
 - Custom aliases
 - History configuration
 - High-precision time command
-- zoxide integration (use `z` instead of `cd` for smart directory navigation)
+- zoxide integration (cd is aliased to zoxide for smart directory navigation)
+- Local configuration support via ~/.zshrc.local
 
 ### Tmux
 - Mouse support

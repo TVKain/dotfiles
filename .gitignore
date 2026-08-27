@@ -23,3 +23,7 @@ Thumbs.db
 
 # Installation marker (system-specific)
 .dotfiles_installed
+
+# Local configuration files (machine-specific)
+.zshrc.local
+.localrc

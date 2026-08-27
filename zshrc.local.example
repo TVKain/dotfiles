@@ -1,0 +1,22 @@
+# Local configuration template
+# Copy this file to ~/.zshrc.local and add your machine-specific settings
+# This file is NOT committed to git and is for local use only
+
+# Example: Add local aliases
+# alias localproject='cd ~/projects/myproject'
+
+# Example: Add local environment variables
+# export LOCAL_API_KEY="your-api-key-here"
+
+# Example: Add machine-specific paths
+# export PATH="$HOME/local/bin:$PATH"
+
+# Example: Add local functions
+# function mylocalfunction() {
+#     echo "This is a local function"
+# }
+
+# Example: Override cd behavior locally if needed
+# alias cd='builtin cd'  # Use original cd instead of zoxide
+
+# Add your machine-specific configurations below:
