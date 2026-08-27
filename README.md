@@ -77,7 +77,9 @@ For machine-specific settings, credentials, and local overrides:
 ## Backup
 
 The installer automatically backs up existing configurations to:
-`~/dotfiles_backup_YYYYMMDD_HHMMSS/`
+`/tmp/dotfiles_backup_YYYYMMDD_HHMMSS/`
+
+The backup location is displayed during installation and in the completion message. Note that backups are stored in `/tmp/` and may be cleared on system restart.
 
 ## Installation Tracking
 

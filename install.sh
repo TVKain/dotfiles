@@ -151,7 +151,7 @@ prompt_user() {
 backup_configs() {
     print_info "Backing up existing configurations..."
     
-    BACKUP_DIR="$HOME/dotfiles_backup_$(date +%Y%m%d_%H%M%S)"
+    BACKUP_DIR="/tmp/dotfiles_backup_$(date +%Y%m%d_%H%M%S)"
     mkdir -p "$BACKUP_DIR"
     
     [ -f "$HOME/.zshrc" ] && cp "$HOME/.zshrc" "$BACKUP_DIR/" && print_info "Backed up .zshrc"
@@ -160,7 +160,8 @@ backup_configs() {
     [ -d "$HOME/.vim" ] && cp -r "$HOME/.vim" "$BACKUP_DIR/" && print_info "Backed up .vim"
     [ -f "$HOME/.config/starship.toml" ] && cp "$HOME/.config/starship.toml" "$BACKUP_DIR/" && print_info "Backed up starship.toml"
     
-    print_success "Backups created in $BACKUP_DIR"
+    print_success "Backups created successfully"
+    print_info "Backup location: $BACKUP_DIR"
 }
 
 # Function to remove existing configs
@@ -330,7 +331,7 @@ main() {
     print_success "Installation completed!"
     echo "=========================================="
     echo ""
-    print_info "Backups saved to: $BACKUP_DIR"
+    print_info "Backup location: $BACKUP_DIR"
     print_info "Installation version: $INSTALL_VERSION"
     print_info "Please log out and log back in for all changes to take effect."
     print_info "Or run: source ~/.zshrc"
