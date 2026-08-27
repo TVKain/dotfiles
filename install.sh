@@ -248,6 +248,8 @@ install_dependencies() {
         print_success "TPM already installed"
     fi
     
+    # Note: Other tmux plugins (tmux-sensible, tmux-tilish, catppuccin) will be installed by TPM
+    
     # Install vim-plug if not already installed
     if [ ! -f "$HOME/.vim/autoload/plug.vim" ]; then
         print_info "Installing vim-plug..."
@@ -283,8 +285,12 @@ install_dotfiles() {
     
     # Copy starship config
     mkdir -p "$HOME/.config"
-    cp "$DOTFILES_DIR/config/starship.toml" "$HOME/.config/starship.toml"
-    print_success "Installed starship.toml"
+    if [ -f "$DOTFILES_DIR/config/starship.toml" ]; then
+        cp "$DOTFILES_DIR/config/starship.toml" "$HOME/.config/starship.toml"
+        print_success "Installed starship.toml"
+    else
+        print_warning "starship.toml not found in config directory"
+    fi
 }
 
 # Function to set zsh as default shell
@@ -300,7 +306,7 @@ set_default_shell() {
 
 # Function to install tmux plugins
 install_tmux_plugins() {
-    print_info "Installing tmux plugins..."
+    print_info "Installing tmux plugins via TPM..."
     if [ -d "$HOME/.tmux/plugins/tpm" ]; then
         ~/.tmux/plugins/tpm/bin/install_plugins
         print_success "Tmux plugins installed"

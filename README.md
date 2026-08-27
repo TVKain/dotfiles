@@ -34,7 +34,7 @@ cd ~/dotfiles
 - Tmux with TPM plugin manager
 - Vim with configuration
 - Starship prompt
-- Tmux plugins (via TPM)
+- Tmux plugins (via TPM): tmux-sensible, tmux-tilish, catppuccin theme
 - Vim plugins (via vim-plug)
 - fzf (fuzzy finder)
 - ripgrep (fast search tool)
