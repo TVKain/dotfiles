@@ -3,6 +3,18 @@
 # Remove blank line before prompt
 add_newline = false
 
+# Username and hostname
+[username]
+show_always = true
+style_user = "bold green"
+style_root = "bold red"
+format = "[$user]($style)@"
+
+[hostname]
+ssh_only = false
+format = "[$hostname]($style) "
+style = "bold dimmed green"
+
 [directory]
 read_only = " "
 read_only_style = ""
