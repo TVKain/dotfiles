@@ -116,12 +116,13 @@ When upgrading, the installer will:
 - Local configuration support via ~/.zshrc.local
 
 ### Tmux
-- Mouse support
+- Mouse support with scroll wheel
 - Catppuccin theme
 - tmux-tilish plugin for i3-style keybindings (Alt+x for new pane, Alt+Shift+x for horizontal split, Alt+0-9 for window switching)
 - Alt+Enter remapped to Alt+x to avoid WSL zoom and Windows settings pane conflicts
 - Window and pane numbering starting from 1 instead of 0
 - Automatic window renumbering
+- Scroll mode (copy mode): Alt+q to enter, PageUp/PageDown to scroll, q to exit
 - Plugin support via TPM
 
 ### Vim
