@@ -123,7 +123,7 @@ When upgrading, the installer will:
 - Window and pane numbering starting from 1 instead of 0
 - Automatic window renumbering
 - Scroll mode (copy mode): Alt+q to enter, q to exit, vi-style keybindings (j/k to scroll)
-- tmux-binding-help plugin: Alt+m to show organized keybinding help popup
+- tmux-binding-help plugin: Ctrl+b then ? to show organized keybinding help popup
 - Plugin support via TPM
 
 ### Vim
