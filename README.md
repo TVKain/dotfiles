@@ -39,6 +39,7 @@ cd ~/dotfiles
 - fzf (fuzzy finder)
 - ripgrep (fast search tool)
 - zoxide (smart cd command)
+- fzf-tab (enhanced tab completion with fzf)
 
 ## Manual Setup
 
@@ -108,7 +109,7 @@ When upgrading, the installer will:
 - History configuration
 - High-precision time command
 - zoxide integration (cd is aliased to zoxide for smart directory navigation)
-- fzf-based completion (interactive fuzzy completion with navigation and highlighting)
+- fzf-tab for enhanced tab completion (fzf-powered with vim navigation and highlighting)
 - Interactive directory selection with 'zi' command (fzf+zoxide with border)
 - Local configuration support via ~/.zshrc.local
 

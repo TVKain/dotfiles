@@ -13,13 +13,13 @@ eval "$(zoxide init zsh)"
 # Override cd with zoxide z command for smart navigation
 alias cd='z'
 
-# Enhanced fzf completion and key bindings
-if command -v fzf &> /dev/null; then
-    # Use fzf for completion
-    eval "$(fzf --zsh)"
+# Enable fzf-tab for better completion
+if [ -f ~/.local/share/fzf-tab/fzf-tab.plugin.zsh ]; then
+    source ~/.local/share/fzf-tab/fzf-tab.plugin.zsh
     
-    # FZF key bindings for better navigation (ctrl-j/k for vim-style)
-    export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --inline-info --bind=ctrl-j:down,ctrl-k:up'
+    # Configure fzf-tab
+    zstyle ':completion:*' menu no
+    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
     
     # Add fzf+zoxide for interactive directory selection
     # Use 'zi' command for interactive directory selection
@@ -35,12 +35,6 @@ fi
 setopt NO_BEEP
 setopt NO_HUP
 setopt NO_CHECK_JOBS
-
-# Enhanced completion options
-setopt AUTO_MENU
-setopt COMPLETE_IN_WORD
-setopt LIST_PACKED
-setopt MENU_COMPLETE
 
 # User configuration
 

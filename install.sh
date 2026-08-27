@@ -212,6 +212,15 @@ install_dependencies() {
         print_success "zoxide already installed"
     fi
     
+    # Install fzf-tab for better completion
+    if [ ! -d "$HOME/.local/share/fzf-tab" ]; then
+        print_info "Installing fzf-tab..."
+        git clone https://github.com/Aloxaf/fzf-tab ~/.local/share/fzf-tab
+        print_success "fzf-tab installed"
+    else
+        print_success "fzf-tab already installed"
+    fi
+    
     # Install starship if not already installed
     if ! command -v starship &> /dev/null; then
         print_info "Installing starship..."

@@ -27,3 +27,6 @@ Thumbs.db
 # Local configuration files (machine-specific)
 .zshrc.local
 .localrc
+
+# External plugins (installed separately)
+.local/share/fzf-tab
