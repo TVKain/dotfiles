@@ -10,11 +10,23 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'liuchengxu/vim-which-key'
 
-" C Intellisense and Formatting
+" C Intellisense
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'rhysd/vim-clang-format'
+
+" Catppuccin theme
+Plug 'catppuccin/vim', {'as': 'catppuccin'}
 
 call plug#end()
+
+" ===========================
+"  Catppuccin Theme Configuration
+" ===========================
+" Load theme if plugin is installed
+if filereadable(expand('~/.vim/plugged/catppuccin/colors/catppuccin_mocha.vim'))
+    syntax enable
+    set background=dark
+    colorscheme catppuccin_mocha
+endif
 
 " ===========================
 "  Basic Settings
@@ -22,10 +34,14 @@ call plug#end()
 set nocompatible
 set number
 set relativenumber
-set ruler
 set showcmd
 set showmatch
 set hidden
+
+" Fix vim screen clearing in tmux
+if &term =~ 'tmux'
+    set t_ut=y
+endif
 
 " ===========================
 "  Scroll / Cursor Position
@@ -53,28 +69,23 @@ set formatoptions=crql
 " ===========================
 "  Clang-format (BSD style)
 " ===========================
-let g:clang_format#style_options = {
-    \ "BasedOnStyle": "LLVM",
-    \ "IndentWidth": 8,
-    \ "TabWidth": 8,
-    \ "UseTab": "Always",
-    \ "ColumnLimit": 80,
-    \ "BreakBeforeBraces": "Allman",
-    \ "AllowShortFunctionsOnASingleLine": "Empty",
-    \ "AllowShortBlocksOnASingleLine": "Empty",
-    \ "AllowShortIfStatementsOnASingleLine": "Never",
-    \ "AllowShortLoopsOnASingleLine": "False",
-    \ "IndentCaseLabels": "True",
-    \ "PointerAlignment": "Right",
-    \ "SortIncludes": "False",
-    \ }
+" Custom function to format C files using clang-format directly
+function! ClangFormatBuffer()
+    let l:save = winsaveview()
+    let l:style = '{BasedOnStyle: LLVM, IndentWidth: 8, TabWidth: 8, UseTab: Always, ColumnLimit: 80, BreakBeforeBraces: Allman}'
+    silent! execute '%!clang-format -style=' . shellescape(l:style)
+    call winrestview(l:save)
+endfunction
 
 " Format on save for C files
-autocmd BufWritePre *.c,*.h,*.cpp,*.hpp :ClangFormat
+augroup clang_format_custom
+    autocmd!
+    autocmd BufWritePre *.c,*.h,*.cpp,*.hpp call ClangFormatBuffer()
+augroup END
 
 " Keybinding for manual format
-nnoremap <leader>F :ClangFormat<CR>
-vnoremap <leader>F :ClangFormat<CR>
+nnoremap <leader>F :call ClangFormatBuffer()<CR>
+vnoremap <leader>F :call ClangFormatBuffer()<CR>
 
 " ===========================
 "  CoC (Conquer of Completion)
@@ -104,6 +115,17 @@ if has("nvim-0.5.0") || has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
+
+" CoC highlight groups for better visibility with catppuccin mocha theme
+highlight! link CocMenuSel PmenuSel
+highlight! link CocPumSearch DiagnosticInfo
+highlight! link CocPumDetail DiagnosticHint
+highlight! link CocPumDocumentation Comment
+
+" Custom CoC popup colors for better visibility with mocha theme
+highlight CocFloating ctermbg=236 ctermfg=15 guibg=#1e1e2e guifg=#cdd6f4
+highlight CocMenuSel ctermbg=61 ctermfg=15 guibg=#89b4fa guifg=#1e1e2e
+highlight CocPumVirtualText ctermbg=236 ctermfg=8 guibg=#1e1e2e guifg=#6c7086
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -211,11 +233,13 @@ nnoremap <silent><nowait> <leader>p  :<C-u>CocListResume<CR>
 " ===========================
 "  Display
 " ===========================
-syntax on
 filetype plugin indent on
 set encoding=utf-8
 set backspace=indent,eol,start
 set textwidth=80
+
+" Bracket pair highlighting for better visibility with catppuccin mocha
+highlight MatchParen cterm=bold ctermfg=15 ctermbg=61 gui=bold guifg=#cdd6f4 guibg=#89b4fa
 
 " ===========================
 "  Search

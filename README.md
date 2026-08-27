@@ -36,6 +36,8 @@ cd ~/dotfiles
 - Starship prompt
 - Leaf (terminal markdown previewer)
 - Bat (cat clone with syntax highlighting)
+- Clangd (LSP for C/C++)
+- Node.js and npm (via NodeSource LTS)
 - Tmux plugins (via TPM): tmux-sensible, tmux-tilish, catppuccin theme
 - Vim plugins (via vim-plug)
 - fzf (fuzzy finder)
@@ -48,7 +50,7 @@ cd ~/dotfiles
 
 After installation, you may need to:
 
-1. **Tmux plugins**: Press `Ctrl+B` then `Shift+I` to install tmux plugins (if not auto-installed)
+1. **Tmux plugins**: The installer automatically installs tmux plugins via TPM. If needed, manually install by pressing `Ctrl+B` then `Shift+I` in tmux
 2. **Vim plugins**: The installer automatically runs `:PlugInstall`, but you can manually run it in vim if needed
 
 ## Configuration Files
@@ -139,6 +141,11 @@ When upgrading, the installer will:
 - Git branch display
 - Username and hostname display
 - Performance optimized
+
+### Development Tools
+- Clangd (LSP for C/C++ development)
+- Node.js and npm (LTS version via NodeSource)
+- Ready for web development and C/C++ development
 
 ### Leaf (Terminal Markdown Previewer)
 - GUI-like markdown preview in terminal

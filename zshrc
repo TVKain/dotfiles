@@ -86,6 +86,7 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias cat='bat --paging=never'
+alias vf='vim $(fzf)'
 
 # History configuration
 HISTSIZE=10000

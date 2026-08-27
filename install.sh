@@ -278,6 +278,34 @@ install_dependencies() {
     else
         print_success "vim-plug already installed"
     fi
+    
+    # Install clangd (LSP for C/C++)
+    if ! command -v clangd &> /dev/null; then
+        print_info "Installing clangd..."
+        sudo apt install -y clangd
+        print_success "clangd installed"
+    else
+        print_success "clangd already installed"
+    fi
+    
+    # Install clang-format (required for vim C formatting)
+    if ! command -v clang-format &> /dev/null; then
+        print_info "Installing clang-format..."
+        sudo apt install -y clang-format
+        print_success "clang-format installed"
+    else
+        print_success "clang-format already installed"
+    fi
+    
+    # Install Node.js and npm using NodeSource
+    if ! command -v node &> /dev/null; then
+        print_info "Installing Node.js and npm..."
+        curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+        sudo apt install -y nodejs
+        print_success "Node.js and npm installed"
+    else
+        print_success "Node.js and npm already installed"
+    fi
 }
 
 # Function to install dotfiles
@@ -327,7 +355,18 @@ set_default_shell() {
 install_tmux_plugins() {
     print_info "Installing tmux plugins via TPM..."
     if [ -d "$HOME/.tmux/plugins/tpm" ]; then
+        # First source tmux config to load plugin list
+        tmux source-file "$HOME/.tmux.conf" 2>/dev/null || true
+        # Then install plugins
         ~/.tmux/plugins/tpm/bin/install_plugins
+        
+        # Manual fallback for tmux-tilish if TPM fails
+        if [ ! -d "$HOME/.tmux/plugins/tmux-tilish" ]; then
+            print_info "TPM failed to install tmux-tilish, installing manually..."
+            git clone https://github.com/jabirali/tmux-tilish.git ~/.tmux/plugins/tmux-tilish
+            print_success "tmux-tilish installed manually"
+        fi
+        
         print_success "Tmux plugins installed"
     else
         print_warning "TPM not found, skipping tmux plugin installation"
