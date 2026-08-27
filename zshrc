@@ -18,8 +18,8 @@ if command -v fzf &> /dev/null; then
     # Use fzf for completion
     eval "$(fzf --zsh)"
     
-    # FZF key bindings for better navigation and highlighting
-    export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --inline-info --color=hl+:fg:yellow,hl:fg:yellow,pointer:fg:blue,marker:fg:blue --bind=j:down,k:up'
+    # FZF key bindings for better navigation (ctrl-j/k for vim-style)
+    export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --inline-info --bind=ctrl-j:down,ctrl-k:up'
     
     # Add fzf+zoxide for interactive directory selection
     # Use 'zi' command for interactive directory selection
