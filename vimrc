@@ -189,7 +189,10 @@ function! s:show_documentation()
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+augroup coc_highlight
+    autocmd!
+    autocmd CursorHold * if exists('*coc#rpc#ready') && coc#rpc#ready() | silent call CocActionAsync('highlight') | endif
+augroup END
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -226,11 +229,8 @@ command! -nargs=0 OR   :call CocAction('runCommand', 'editor.action.organizeImpo
 " ===========================
 "  CoC Extensions Configuration
 " ===========================
-" Install CoC extensions for C/C++ development
-autocmd BufReadPost *.c,*.h,*.cpp,*.hpp call CocAction('runCommand', 'coc-install', 'coc-clangd')
-
-" Enable document symbols for better code navigation
-autocmd BufReadPost * call CocAction('runCommand', 'coc-install', 'coc-json', 'coc-yaml', 'coc-markdownlint')
+" CoC extensions should be installed manually when needed:
+" :CocInstall coc-clangd coc-json coc-yaml coc-markdownlint
 
 " ===========================
 "  Enhanced CoC Features
