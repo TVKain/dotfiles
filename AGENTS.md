@@ -79,6 +79,7 @@ The installer handles these dependencies:
 - fzf, ripgrep
 - clangd (LSP for C/C++)
 - clang-format (C code formatting)
+- gdb-multiarch (cross-architecture debugging)
 - bear (generate compile_commands.json for intellisense)
 
 ### Language runtimes:
@@ -223,6 +224,11 @@ This file is automatically sourced by zshrc and is gitignored.
 - Copy `.clangd.example` to your project root as `.clangd`
 - Or generate `compile_commands.json` with: `bear -- make` (or your build command)
 - For CoC settings, copy `coc-settings.json.example` to `~/.config/coc/settings.json`
+
+### GDB architecture errors (RISC-V projects)
+- For cross-architecture debugging (like xv6), use `gdb-multiarch` instead of `gdb`
+- The dotfiles installer includes `gdb-multiarch` for this purpose
+- Example: `gdb-multiarch kernel/kernel` instead of `gdb kernel/kernel`
 
 ## Testing Changes
 

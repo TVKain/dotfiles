@@ -291,6 +291,15 @@ install_dependencies() {
         print_success "clangd already installed"
     fi
     
+    # Install gdb-multiarch (for cross-architecture debugging)
+    if ! command -v gdb-multiarch &> /dev/null; then
+        print_info "Installing gdb-multiarch..."
+        sudo apt install -y gdb-multiarch
+        print_success "gdb-multiarch installed"
+    else
+        print_success "gdb-multiarch already installed"
+    fi
+    
     # Install clang-format (required for vim C formatting)
     if ! command -v clang-format &> /dev/null; then
         print_info "Installing clang-format..."
