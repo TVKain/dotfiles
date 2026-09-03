@@ -97,6 +97,7 @@ check_existing_configs() {
     [ -f "$HOME/.vimrc" ] && EXISTING_CONFIGS+=(".vimrc")
     [ -d "$HOME/.vim" ] && EXISTING_CONFIGS+=(".vim")
     [ -f "$HOME/.config/starship.toml" ] && EXISTING_CONFIGS+=("starship.toml")
+    [ -f "$HOME/.config/gdb/gdbinit" ] && EXISTING_CONFIGS+=("gdb/gdbinit")
     
     if [ ${#EXISTING_CONFIGS[@]} -gt 0 ]; then
         echo ""
@@ -159,6 +160,7 @@ backup_configs() {
     [ -f "$HOME/.vimrc" ] && cp "$HOME/.vimrc" "$BACKUP_DIR/" && print_info "Backed up .vimrc"
     [ -d "$HOME/.vim" ] && cp -r "$HOME/.vim" "$BACKUP_DIR/" && print_info "Backed up .vim"
     [ -f "$HOME/.config/starship.toml" ] && cp "$HOME/.config/starship.toml" "$BACKUP_DIR/" && print_info "Backed up starship.toml"
+    [ -f "$HOME/.config/gdb/gdbinit" ] && cp "$HOME/.config/gdb/gdbinit" "$BACKUP_DIR/" && print_info "Backed up gdb/gdbinit"
     
     print_success "Backups created successfully"
     print_info "Backup location: $BACKUP_DIR"
@@ -173,6 +175,7 @@ remove_existing_configs() {
     [ -f "$HOME/.vimrc" ] && rm "$HOME/.vimrc" && print_info "Removed .vimrc"
     [ -d "$HOME/.vim" ] && rm -rf "$HOME/.vim" && print_info "Removed .vim"
     [ -f "$HOME/.config/starship.toml" ] && rm "$HOME/.config/starship.toml" && print_info "Removed starship.toml"
+    [ -f "$HOME/.config/gdb/gdbinit" ] && rm "$HOME/.config/gdb/gdbinit" && print_info "Removed gdb/gdbinit"
     
     print_success "Existing configurations removed"
 }
@@ -297,6 +300,15 @@ install_dependencies() {
         print_success "clang-format already installed"
     fi
     
+    # Install bear (for generating compile_commands.json)
+    if ! command -v bear &> /dev/null; then
+        print_info "Installing bear (for compile_commands.json generation)..."
+        sudo apt install -y bear
+        print_success "bear installed"
+    else
+        print_success "bear already installed"
+    fi
+    
     # Install Node.js and npm using NodeSource
     if ! command -v node &> /dev/null; then
         print_info "Installing Node.js and npm..."
@@ -337,6 +349,15 @@ install_dotfiles() {
         print_success "Installed starship.toml"
     else
         print_warning "starship.toml not found in config directory"
+    fi
+    
+    # Copy GDB config
+    mkdir -p "$HOME/.config/gdb"
+    if [ -f "$DOTFILES_DIR/config/gdbinit" ]; then
+        cp "$DOTFILES_DIR/config/gdbinit" "$HOME/.config/gdb/gdbinit"
+        print_success "Installed gdbinit"
+    else
+        print_warning "gdbinit not found in config directory"
     fi
 }
 

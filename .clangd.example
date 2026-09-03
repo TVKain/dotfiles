@@ -1,0 +1,21 @@
+# .clangd configuration file
+# Copy this to .clangd in your project root to fix clangd warnings
+
+Diagnostics:
+  UnusedIncludes: Strict
+  MissingIncludes: Strict
+
+CompileFlags:
+  # Add compiler flags that match your build system
+  Add: [
+    -I/usr/include,
+    -I/usr/local/include,
+    -I/usr/include/x86_64-linux-gnu,
+    -std=gnu17,  # or gnu11, gnu99 depending on your project
+    -D_GNU_SOURCE,
+  ]
+  # Remove flags that might conflict
+  Remove: []
+
+# If you use compile_commands.json, clangd will use that instead
+# Generate it with: bear -- make  (or your build command)

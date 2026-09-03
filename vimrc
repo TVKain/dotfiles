@@ -50,13 +50,82 @@ set scrolloff=999
 
 " ===========================
 "  Indentation / Tab Settings
-"  FreeBSD style(9)
+"  Auto-detect file style, default to FreeBSD style(9)
 " ===========================
+" Enable modelines to respect file-specific settings in comments
+set modeline
+set modelines=5
+
+" Default to FreeBSD style (for new files)
 set tabstop=8
 set shiftwidth=8
 set softtabstop=0
 set noexpandtab
 set autoindent
+
+" Auto-detect indentation from existing file content
+function! DetectIndent()
+    " Save current cursor position
+    let save_cursor = getpos('.')
+    
+    " Go to start of file
+    call cursor(1, 1)
+    
+    " Look for indentation patterns in first 100 lines
+    let spaces_count = 0
+    let tabs_count = 0
+    let indent_size = 0
+    
+    for i in range(1, min([100, line('$')]))
+        let line = getline(i)
+        " Count lines starting with spaces (but not just spaces)
+        if line =~ '^\s\+\S'
+            let spaces_count += 1
+            " Count leading spaces to guess indent size
+            let leading = matchstr(line, '^\s\+')
+            if len(leading) > indent_size
+                let indent_size = len(leading)
+            endif
+        " Count lines starting with tabs
+        elseif line =~ '^\t\S'
+            let tabs_count += 1
+        endif
+    endfor
+    
+    " Restore cursor position
+    call setpos('.', save_cursor)
+    
+    " Apply detected settings
+    if tabs_count > spaces_count
+        " File uses tabs
+        set noexpandtab
+        set tabstop=8
+        set shiftwidth=8
+        set softtabstop=0
+    elseif spaces_count > tabs_count && indent_size > 0
+        " File uses spaces, detect common sizes
+        set expandtab
+        if indent_size % 4 == 0
+            let &tabstop = 4
+            let &shiftwidth = 4
+            let &softtabstop = 4
+        elseif indent_size % 2 == 0
+            let &tabstop = 2
+            let &shiftwidth = 2
+            let &softtabstop = 2
+        else
+            let &tabstop = indent_size
+            let &shiftwidth = indent_size
+            let &softtabstop = indent_size
+        endif
+    endif
+endfunction
+
+" Auto-detect on file open (but not for new files)
+augroup auto_indent_detect
+    autocmd!
+    autocmd BufReadPost * if line('$') > 1 | call DetectIndent() | endif
+augroup END
 
 " ===========================
 "  C-Specific / style(9)
@@ -64,28 +133,8 @@ set autoindent
 set cindent
 set cinoptions=(4200,u4200,+0.5s,*500,t0,U4200
 set indentexpr=
-set formatoptions=crql
-
-" ===========================
-"  Clang-format (BSD style)
-" ===========================
-" Custom function to format C files using clang-format directly
-function! ClangFormatBuffer()
-    let l:save = winsaveview()
-    let l:style = '{BasedOnStyle: LLVM, IndentWidth: 8, TabWidth: 8, UseTab: Always, ColumnLimit: 80, BreakBeforeBraces: Allman}'
-    silent! execute '%!clang-format -style=' . shellescape(l:style)
-    call winrestview(l:save)
-endfunction
-
-" Format on save for C files
-augroup clang_format_custom
-    autocmd!
-    autocmd BufWritePre *.c,*.h,*.cpp,*.hpp call ClangFormatBuffer()
-augroup END
-
-" Keybinding for manual format
-nnoremap <leader>F :call ClangFormatBuffer()<CR>
-vnoremap <leader>F :call ClangFormatBuffer()<CR>
+" Disable automatic formatting to preserve include ordering
+set formatoptions=tc
 
 " ===========================
 "  CoC (Conquer of Completion)
@@ -391,8 +440,10 @@ function! s:ShowManual()
         \ '   └─────────────────────────────────────────────┘',
         \ '',
         \ '   ┌─────────────────────────────────────────────┐',
-        \ '   │  INDENTATION — FreeBSD style(9)             │',
+        \ '   │  INDENTATION — Auto-detect + FreeBSD(9)     │',
         \ '   ├─────────────────────────────────────────────┤',
+        \ '   │  Auto-detects from file content             │',
+        \ '   │  Default (new files): FreeBSD style(9)     │',
         \ '   │  tabstop      8     Hard tab = 8 columns    │',
         \ '   │  shiftwidth   8     Indent = 8 columns      │',
         \ '   │  expandtab    off   Real tabs, not spaces   │',
@@ -403,7 +454,6 @@ function! s:ShowManual()
         \ '   ┌─────────────────────────────────────────────┐',
         \ '   │  C INTELLISENSE & FORMATTING                │',
         \ '   ├─────────────────────────────────────────────┤',
-        \ '   │  Space F      Format C file (BSD style)     │',
         \ '   │  Space cf     Format selected (CoC)         │',
         \ '   │  gd           Go to definition              │',
         \ '   │  gr           Go to references              │',

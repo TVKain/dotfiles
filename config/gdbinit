@@ -1,0 +1,3 @@
+# GDB configuration
+# Allow auto-loading of .gdbinit files from any directory
+set auto-load safe-path /

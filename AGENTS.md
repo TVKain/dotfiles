@@ -16,7 +16,10 @@ Personal dotfiles for Ubuntu 24.04+ with WSL support. Includes zsh, tmux, vim, a
 ├── zshrc               # Zsh configuration
 ├── zshrc.local.example # Example local configuration (gitignored)
 ├── config/
-│   └── starship.toml   # Starship prompt configuration
+│   ├── starship.toml   # Starship prompt configuration
+│   └── gdbinit         # GDB configuration
+├── .clangd.example     # Example clangd configuration
+├── coc-settings.json.example # Example CoC settings
 └── AGENTS.md           # This file
 ```
 
@@ -75,6 +78,8 @@ The installer handles these dependencies:
 - git, curl, zsh, vim, tmux, bat
 - fzf, ripgrep
 - clangd (LSP for C/C++)
+- clang-format (C code formatting)
+- bear (generate compile_commands.json for intellisense)
 
 ### Language runtimes:
 - Node.js and npm (via NodeSource setup_lts.x)
@@ -112,6 +117,7 @@ The installer handles these dependencies:
 ### vimrc
 - Uses vim-plug for plugin management
 - Leaf markdown preview integration (`\md` to preview)
+- Auto-detects file indentation style (tabs vs spaces, indent size)
 - Custom keybindings and configuration
 
 ### zshrc
@@ -211,6 +217,12 @@ This file is automatically sourced by zshrc and is gitignored.
 ### WSL-specific issues
 - Check if Alt+Enter remap is working in tmux
 - Verify Windows terminal settings if keybindings don't work
+
+### Clangd/CoC intellisense warnings
+- Clangd needs configuration to find system headers and compiler flags
+- Copy `.clangd.example` to your project root as `.clangd`
+- Or generate `compile_commands.json` with: `bear -- make` (or your build command)
+- For CoC settings, copy `coc-settings.json.example` to `~/.config/coc/settings.json`
 
 ## Testing Changes
 
